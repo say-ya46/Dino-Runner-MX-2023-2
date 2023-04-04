@@ -6,7 +6,7 @@ class Dinosaur:
     Y_POS =310
     Y_POS_DUCK = 340
     JUMP_VEL = 8.5
-    pygame.font
+
 
 
     def __init__(self):
@@ -73,11 +73,3 @@ class Dinosaur:
         self.dino_rect.x = self.X_POS
         self.dino_rect.y = self.Y_POS_DUCK
         self.step_index += 1 
-
-    #def texto(self):
-     
-     #   pygame.font.init():
-      
-    #  pygame.font.Font(None, 30)
-        
-     #   Font.render("jump",True, (0,0,255), None)
