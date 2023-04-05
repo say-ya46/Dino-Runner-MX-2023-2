@@ -1,7 +1,7 @@
 import pygame
 import random
-from dino_runner.utils.constants import BIRD
-from dino_runner.utils.constants import SCREEN_WIDTH
+from dino_runner.utils.constants import BIRD, DINODEAD
+from dino_runner.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Birds():
 
@@ -10,6 +10,8 @@ class Birds():
         self.y_pos = 240
         self.x_pos = SCREEN_WIDTH + 500
         
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
         self.image = BIRD[0]
         self.bird_rect = self.image.get_rect()
         self.bird_rect.x = self.x_pos

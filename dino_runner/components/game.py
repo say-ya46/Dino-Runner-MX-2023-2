@@ -3,6 +3,7 @@ from dino_runner.components.Dinosaur import Dinosaur
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, CLOUD
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.obstacles.bird_fly import Birds
+from dino_runner.components.power_ups.powerup_manager import Power_up_Manager
 #from threading import Timer
 #from dino_runner.components.obstacles.bird_manager import ManagerBird
 
@@ -13,7 +14,12 @@ class Game:
         self.y_pos = 29
         self.x_pos = SCREEN_WIDTH
         
+        #self.dead_activate = False
+        self.power_up_manager = Power_up_Manager()
+
         self.dino_dead = False
+
+        self.points = 0
 
         pygame.init()
         pygame.display.set_caption(TITLE)
@@ -55,14 +61,19 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.birds.update(self.game_speed, self.player)
         self.player.update(user_input)
+        self.power_up_manager.update(self.game_speed, self.points, self.player)
         self.ObstacleManager.update(self.game_speed, self.player )
         if self.player.dino_dead or self.dino_dead:
             self.playing = False
+        self.points += 1
+    def draw_dead(self):
+        self.player.dead(self.screen)
 
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
+        self.power_up_manager.draw()
         self.draw_clouds()
         self.birds.draw(self.screen)
         self.player.draw(self.screen)
