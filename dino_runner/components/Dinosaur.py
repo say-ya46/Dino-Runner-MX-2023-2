@@ -115,12 +115,12 @@ class Dinosaur:
         self.dino_rect.y = self.Y_POS_DUCK
         self.step_index += 1 
 
-    def dino_dead1(self):
-        y, x = self.dino_rect.y, self.dino_rect.x
-        self.image = DINODEAD
-        self.dino_rect = self.image.get_rect()
-        self.dino_rect.x = x
-        self.dino_rect.y = y
+    #def dino_dead1(self):
+     #   y, x = self.dino_rect.y, self.dino_rect.x
+      #  self.image = DINODEAD
+       # self.dino_rect = self.image.get_rect()
+       # self.dino_rect.x = x
+      #  self.dino_rect.y = y
 
     def set_power_up(self, power_up):
         if power_up.type == SHIELD_TYPE:
