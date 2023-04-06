@@ -1,4 +1,4 @@
-from dino_runner.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, DINODEAD
+from dino_runner.utils.constants import SCREEN_WIDTH
 import pygame
 
 class Obstacle:
@@ -13,8 +13,9 @@ class Obstacle:
         self.rect.x -= game_speed
         if self.rect.colliderect(player.dino_rect):
             if not player.shield:
+                player.dino_dead1()
                 pygame.time.delay(300)
-                player.dino_dead == True
+                player.dino_dead = True
             
             
     def draw(self, screen):

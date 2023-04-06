@@ -1,5 +1,6 @@
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.largecactus import LargeCactus
+import random
 class ObstacleManager:
     
     def __init__(self):
@@ -9,7 +10,7 @@ class ObstacleManager:
 
     def update(self, game_speed, player):
 
-        import random
+        
         
         if len(self.obstacles) == 0:
             self.objeto_elegido = random.choice(self.type_cactus)

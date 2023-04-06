@@ -1,29 +1,30 @@
 import pygame
+
 from dino_runner.components.Dinosaur import Dinosaur
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, CLOUD
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.obstacles.bird_fly import Birds
-from dino_runner.components.power_ups.powerup_manager import Power_up_Manager
+from dino_runner.components.power_ups.powerup_manager import PowerupManager
 #from threading import Timer
 #from dino_runner.components.obstacles.bird_manager import ManagerBird
 
 
 class Game:
     def __init__(self):
+        pygame.init()
+        pygame.display.set_caption(TITLE)
+        pygame.display.set_icon(ICON)
+
         self.x_pos = int
         self.y_pos = 29
         self.x_pos = SCREEN_WIDTH
         
         #self.dead_activate = False
-        self.power_up_manager = Power_up_Manager()
+        self.power_up_manager = PowerupManager()
 
         self.dino_dead = False
 
         self.points = 0
-
-        pygame.init()
-        pygame.display.set_caption(TITLE)
-        pygame.display.set_icon(ICON)
 
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
@@ -35,6 +36,9 @@ class Game:
         
         self.x_pos_c1 = 1300
         self.y_pos_c1 = 40
+
+        self.x_pos_c2 = 1300
+        self.y_pos_c2 = 100
 
         self.x_pos_c = 1300
         self.y_pos_c = 200
@@ -59,21 +63,19 @@ class Game:
 
     def update(self):
         user_input = pygame.key.get_pressed()
-        self.birds.update(self.game_speed, self.player)
+        self.birds.update(self.player)
         self.player.update(user_input)
         self.power_up_manager.update(self.game_speed, self.points, self.player)
         self.ObstacleManager.update(self.game_speed, self.player )
-        if self.player.dino_dead or self.dino_dead:
-            self.playing = False
         self.points += 1
-    def draw_dead(self):
-        self.player.dead(self.screen)
-
+        if self.player.dino_dead:
+            self.playing = False
+        
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
-        self.power_up_manager.draw()
+        self.power_up_manager.draw(self.screen)
         self.draw_clouds()
         self.birds.draw(self.screen)
         self.player.draw(self.screen)
@@ -106,3 +108,9 @@ class Game:
             self.screen.blit(CLOUD,(image_width + self.x_pos_c1, self.y_pos_c1))
             self.x_pos_c1 = 1240
         self.x_pos_c1 -= 15
+
+        self.screen.blit(CLOUD, (self.x_pos_c2, self.y_pos_c2))
+        if self.x_pos_c2 <= -image_width:
+            self.screen.blit(CLOUD,(image_width + self.x_pos_c2, self.y_pos_c2))
+            self.x_pos_c2 = 1240
+        self.x_pos_c2 -= 4

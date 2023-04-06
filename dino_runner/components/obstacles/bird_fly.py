@@ -1,31 +1,32 @@
 import pygame
 import random
-from dino_runner.utils.constants import BIRD, DINODEAD
+from dino_runner.utils.constants import BIRD
 from dino_runner.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Birds():
 
     def __init__(self):
-        self.x_pos = int
+        
         self.y_pos = 240
-        self.x_pos = SCREEN_WIDTH + 500
+        self.x_pos = SCREEN_WIDTH #+ 400
         
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
+        self.game_speed = 30
         self.image = BIRD[0]
         self.bird_rect = self.image.get_rect()
         self.bird_rect.x = self.x_pos
         self.bird_rect.y = self.y_pos
-        self.posibles_y = [240, 150, 300, 290]
+        self.posibles_y = [240, 150, 300, 200]
         self.step_index = 0
 
-    def update(self,game_speed, player):
+    def update(self, player):
         
-        self.bird_rect.x -= (game_speed)
+        self.bird_rect.x -= self.game_speed
 
         if self.bird_rect.colliderect(player.dino_rect):
-            pygame.time.delay(300)
-            player.dino_dead = True
+            if not player.shield:
+                pygame.time.delay(300)
+                player.dino_dead = True
                 
         a = True
         if a:
@@ -41,7 +42,7 @@ class Birds():
 
         screen.blit(self.image,self.bird_rect)
 
-        if self.bird_rect.x == 0:
+        if self.bird_rect.x < -self.bird_rect.width:
             self.bird_rect.x = SCREEN_WIDTH
             self.bird_rect.y = random.choice(self.posibles_y)
 
