@@ -13,11 +13,12 @@ pygame.mixer.init()
 
 jump = pygame.mixer.Sound('dino_runner/assets/sounds/jump_normal.wav')
 deadS = pygame.mixer.Sound('dino_runner/assets/sounds/dead.wav')
-sound_game = pygame.mixer.Sound('dino_runner/assets/sounds/game_sound.wav')
+#sound_game = pygame.mixer.Sound('dino_runner/assets/sounds/game_sound.wav')
 buff = pygame.mixer.Sound('dino_runner/assets/sounds/power_up_rise.wav')
 menu = pygame.mixer.Sound('dino_runner/assets/sounds/sound_menu.wav')
 
 menu.play()
+
 
 
 #from dino_runner.components.obstacles.bird_manager import ManagerBird
@@ -85,7 +86,7 @@ class Game:
                 self.playing = False
             if event.type == pygame.KEYDOWN and not self.playing:
                 menu.stop()
-                sound_game.play()
+                #sound_game.play()
                 self.playing = True
                 self.reset()
 
@@ -108,7 +109,7 @@ class Game:
                 self.player.activate_support = True
             
             if self.player.available_life <= 0:
-                sound_game.stop()
+                #sound_game.stop()
                 deadS.play()
                 menu.play()
                 self.player.dino_dead = True
@@ -226,7 +227,7 @@ class Game:
         life, life_rect = text_utils.get_message("vida restante: " + str(lifes) + "%", 20, 100, 20)
         self.screen.blit(life, life_rect)
         
-        score, score_rect = text_utils.get_message("points: " + str(self.points).zfill(7), 20, 1000, 40)
+        score, score_rect = text_utils.get_message("points: " + str(self.points).zfill(5), 20, 1000, 40)
         self.screen.blit(score, score_rect)
 
         birds, birds_rect = text_utils.get_message("sum of birds " + str(self.birds.bird_points), 20, 1000, 70)
@@ -260,7 +261,7 @@ class Game:
             self.screen.blit(tip, tip_rect)
 
             text, text_rect = text_utils.get_message("press any key to restart ", 30)
-            score, score_rect = text_utils.get_message("your score " + str(self.points).zfill(7), 30, height = SCREEN_HEIGHT // 2 + 50 )
+            score, score_rect = text_utils.get_message("your score " + str(self.points).zfill(5), 30, height = SCREEN_HEIGHT // 2 + 50 )
             self.screen.blit(text, text_rect)
             self.screen.blit(score, score_rect)
 

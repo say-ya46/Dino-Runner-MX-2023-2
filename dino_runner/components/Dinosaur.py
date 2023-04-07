@@ -105,6 +105,7 @@ class Dinosaur:
             self.super = 5
             self.jump_velC = 9.0
             self.rest_jump = 0.5
+            
             if time_to_show < 0:
                 self.reset()
         
