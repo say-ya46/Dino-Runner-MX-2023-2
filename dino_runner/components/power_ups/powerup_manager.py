@@ -1,6 +1,10 @@
 from dino_runner.components.power_ups.shield import Shield
 from dino_runner.components.power_ups.hammer import Hammer
 from dino_runner.components.power_ups.supper_jump import Super_jump
+import pygame
+pygame.mixer.init()
+
+power_up_aparicion = pygame.mixer.Sound('dino_runner/assets/sounds/power_up.wav')
 import random
 class PowerupManager:
 
@@ -14,12 +18,16 @@ class PowerupManager:
         if len(self.power_ups) == 0 and points % self.POINTS == 0:
             self.power_elegido = random.choice(self.tipos_power)
             if self.power_elegido == 1:
+                power_up_aparicion.play()
                 self.power_ups.append(Shield())
             elif self.power_elegido == 2:
+                power_up_aparicion.play()
                 self.power_ups.append(Hammer())
             elif self.power_elegido == 3:
+                power_up_aparicion.play()
                 self.power_ups.append(Super_jump())
         for power_up in self.power_ups:
+            #
             if power_up.used or power_up.rect.x < -power_up.rect.width:
                 self.power_ups.pop()
             if power_up.used:

@@ -7,10 +7,9 @@ class ObstacleManager:
         self.obstacles = []
         self.type_cactus = 1, 2
         self.objeto_elegido = int
+        self.obstacles_points = 0
 
     def update(self, game_speed, player):
-
-        
         
         if len(self.obstacles) == 0:
             self.objeto_elegido = random.choice(self.type_cactus)
@@ -22,6 +21,7 @@ class ObstacleManager:
         for obstacle in self.obstacles:
             if obstacle.rect.x <-  -obstacle.rect.width:
                 self.obstacles.pop()
+                self.obstacles_points += 1
             obstacle.update(game_speed, player)
 
     def draw(self, screen):

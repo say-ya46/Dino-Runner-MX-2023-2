@@ -74,6 +74,10 @@ DINODEAD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png")),
 ]
 
+DINOSTART = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
+]
+
 
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
@@ -84,6 +88,8 @@ SUPER_JUMP = pygame.image.load(os.path.join(IMG_DIR, 'other/bunny.png'))
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
+
+RISE = pygame.image.load(os.path.join(IMG_DIR, 'Other/rise.png'))
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
